@@ -5,6 +5,7 @@ import { gnarkStates, NPCData } from '../components/NPC'
 import { PathDataComponent } from '../components/pathData'
 import { TimeOutComponent } from '../components/timeOut'
 import { Interpolate } from '../helper/interpolation'
+import { CONFIG } from '../config'
 
 export function distanceSystem() {
   const playerTransform = Transform.getOrNull(engine.PlayerEntity)
@@ -14,15 +15,15 @@ export function distanceSystem() {
       const npcData = NPCData.getMutable(entity)
       const dist = getDistance(playerTransform.position, transform.position)
 
-      if (dist < 5 && npcData.state !== gnarkStates.YELLING) {
+      if (dist < CONFIG.GNARK_DETECT_DISTANCE && npcData.state !== gnarkStates.YELLING) {
         changeState(entity, gnarkStates.YELLING)
-      } else if (dist > 5 && npcData.state === gnarkStates.YELLING) {
+      } else if (dist > CONFIG.GNARK_DETECT_DISTANCE && npcData.state === gnarkStates.YELLING) {
         changeState(entity, gnarkStates.WALKING)
       }
     }
   }
 }
-
+ 
 function getDistance(playerPos: Vector3.ReadonlyVector3, NPCPos: Vector3.ReadonlyVector3) {
   const gap = Vector3.subtract(playerPos, NPCPos)
 
