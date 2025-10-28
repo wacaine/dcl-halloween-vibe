@@ -1,0 +1,23 @@
+{
+  "name": "gnark",
+  "description": "ECS7 ",
+  "version": "1.0.0",
+  "dependencies": {
+    "@dcl-sdk/utils": "latest",
+    "@dcl/js-runtime": "7.11.2",
+    "@dcl/sdk": "latest",
+    "colyseus.js": "0.14.15-alpha.0",
+    "dcl-npc-toolkit": "^1.5.1",
+    "dcl-ui-toolkit": "^0.10.0"
+  },
+  "bundleDependencies": [
+    "@dcl-sdk/utils",
+    "dcl-npc-toolkit",
+    "colyseus.js"
+  ],
+  "scripts": {
+    "build": "sdk-commands build --skip-install",
+    "deploy": "sdk-commands deploy",
+    "start": "sdk-commands start"
+  }
+}
