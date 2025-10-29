@@ -7,7 +7,7 @@ import { getData, handleWalkAway } from 'dcl-npc-toolkit'
 import { NPCData, NPCState } from 'dcl-npc-toolkit/dist/types'
 //import { TrackingElement, trackAction } from '../../modules/stats/analyticsComponents'
 import { engine } from '@dcl/sdk/ecs'
-import { getImageAtlasMapping } from 'dcl-npc-toolkit/dist/dialog'
+import { closeDialog, getImageAtlasMapping } from 'dcl-npc-toolkit/dist/dialog'
 import { wrapText } from './uiHelper'
 import * as npcLib from 'dcl-npc-toolkit'
 import { endInteraction } from '../../remoteNpc'
@@ -26,6 +26,8 @@ let npcPortraitSrc: string = ''
 let npcPortraitWidth: number = 250
 let npcPortraitHeight: number = 250
 let npcPortraitBottomPos: number = 0
+let npcPortraitLeftPos: number = -165
+
 // let selectedTheme: string = AtlasTheme.ATLAS_PATH_DARK
 let customUiOrangeTheme: string = 'images/customNpcUi/OrangeAtlas1024.png'
 
@@ -281,7 +283,7 @@ export const uiCustomAskNpc = () => {
                     width: npcPortraitWidth * modalScale,
                     height: npcPortraitHeight * modalScale,
                     positionType: 'absolute',
-                    position: {left: -165 * modalScale, bottom: npcPortraitBottomPos * modalScale}
+                    position: {left: npcPortraitLeftPos * modalScale, bottom: npcPortraitBottomPos * modalScale}
                 }}
                 uiBackground = {{
                     textureMode: 'stretch',
@@ -377,25 +379,26 @@ function setVisibility(status: boolean): void {
 }
 
 export function openAskNpcAiUi(indexOffset = 0) {
-  let questions = REGISTRY.activeNPC.predefinedQuestions
+  let questions = REGISTRY.activeNPC!.predefinedQuestions
   selectedPredefinedQuestion = questions
   console.log('QUESTIONS', questions, selectedPredefinedQuestion)
 
   resetMessages(streamedMsgs)
   streamedMsgsUiControl.reset()
 
-  let npcPortrait = (getData(REGISTRY.activeNPC.entity) as NPCData).portrait
+  let npcPortrait = (getData(REGISTRY.activeNPC!.entity) as NPCData).portrait
   if (npcPortrait) {
-    let npcPortrait = (getData(REGISTRY.activeNPC.entity) as NPCData)
+    let npcPortrait = (getData(REGISTRY.activeNPC!.entity) as NPCData)
     
     if (npcPortrait.portrait) {
       if (typeof npcPortrait.portrait === 'string') {
         npcPortraitSrc = npcPortrait.portrait
       } else {
         npcPortraitSrc = npcPortrait.portrait.path
-        npcPortraitWidth = npcPortrait.portrait.width
-        npcPortraitHeight = npcPortrait.portrait.height
-        npcPortraitBottomPos = npcPortrait.portrait.offsetY
+        npcPortraitWidth = npcPortrait.portrait.width!
+        npcPortraitHeight = npcPortrait.portrait.height!
+        npcPortraitBottomPos = npcPortrait.portrait.offsetY!
+        npcPortraitLeftPos = npcPortrait.portrait.offsetX!
       }
     }
   }
@@ -414,7 +417,8 @@ export function closeAskNpcAiUi(triggerWalkAway: boolean) {
   if (isVisible === false) return
   setVisibility(false)
   disclaimerVisible = false
-  if (!triggerWalkAway) return
+  //debugger
+  //if (!triggerWalkAway) return
   if (REGISTRY.activeNPC) {
     console.log('DebugSession', 'CLOSEUI => walked away', REGISTRY.activeNPC.name)
     endInteraction(REGISTRY.activeNPC)
@@ -429,12 +433,12 @@ function nextQuestion() {
   bIndex += 2
   if (aIndex >= selectedPredefinedQuestion.length) {
 
-    if(REGISTRY.activeNPC.name === 'npc.simone') aIndex = 2
+    if(REGISTRY.activeNPC!.name === 'npc.simone') aIndex = 2
     else aIndex = 0
   
     if (bIndex >= selectedPredefinedQuestion.length) {
       
-      if(REGISTRY.activeNPC.name === 'npc.simone') bIndex = 3
+      if(REGISTRY.activeNPC!.name === 'npc.simone') bIndex = 3
       else bIndex = 1
     }
   }

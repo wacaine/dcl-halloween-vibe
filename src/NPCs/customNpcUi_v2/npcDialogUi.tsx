@@ -13,6 +13,7 @@ let npcPortraitSrc: string = ''
 let npcPortraitWidth: number = 250
 let npcPortraitHeight: number = 250
 let npcPortraitBottomPos: number = 0
+let npcPortraitLeftPos: number = -150
 
 let modalScale = 1
 let modalFontSizeScale = 1
@@ -45,9 +46,10 @@ export function displayDialogNpcUi(value: boolean){
                 npcPortraitSrc = npcPortrait.portrait
             } else {
                 npcPortraitSrc = npcPortrait.portrait.path
-                npcPortraitWidth = npcPortrait.portrait.width
-                npcPortraitHeight = npcPortrait.portrait.height
-                npcPortraitBottomPos = npcPortrait.portrait.offsetY
+                npcPortraitWidth = npcPortrait.portrait.width!
+                npcPortraitHeight = npcPortrait.portrait.height!
+                npcPortraitBottomPos = npcPortrait.portrait.offsetY!
+                npcPortraitLeftPos = npcPortrait.portrait.offsetX!
             }
             }
         }
@@ -88,7 +90,8 @@ export const uiDialogNpc = () => (
                 alignItems:'center',
                 width: 656 * modalScale,
                 height: (256 - 80) * modalScale,
-                positionType: 'absolute'
+                positionType: 'absolute',
+                pointerFilter: 'block'
             }}
             uiBackground = {{
                 textureMode: 'stretch',
@@ -113,7 +116,7 @@ export const uiDialogNpc = () => (
                     width: npcPortraitWidth * modalScale,
                     height: npcPortraitHeight * modalScale,
                     positionType: 'absolute',
-                    position: {left: -150 * modalScale, bottom: npcPortraitBottomPos * modalScale}
+                    position: {left: npcPortraitLeftPos * modalScale, bottom: npcPortraitBottomPos * modalScale}
                 }}
                 uiBackground = {{
                     textureMode: 'stretch',

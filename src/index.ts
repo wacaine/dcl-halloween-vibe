@@ -1,6 +1,7 @@
 import { engine, GltfContainer, Transform } from '@dcl/sdk/ecs'
 import { Vector3 } from '@dcl/sdk/math'
 import * as utils from '@dcl-sdk/utils'
+import "./polyfill/delcares";
 
 import { createGnark } from './gnark'
 
@@ -57,7 +58,7 @@ export function main() {
   })
 
   createGnark(0)
-  createGnark(1)
+  //createGnark(1)
 
 
 

@@ -12,9 +12,9 @@ export class NpcQuestionData {
 }
 
 export const genericPrefinedQuestions: NpcQuestionData[] = [
-  { displayText: "Tell me a scrary story!", aiQuery: "Tell me a scrary story!" },
-  { displayText: "What are you afraid of?", aiQuery: "What are you afraid of?" },
-  { displayText: "What are all these coins?", aiQuery: "What are all these coins?" }, 
+  { displayText: "Tell me a scrary story!", aiQuery: "Tell me a scrary story" },
+  { displayText: "What are you afraid of?", aiQuery: "What are you afraid of" },
+  { displayText: "What are all these coins?", aiQuery: "What are all these coins" }, 
   { displayText: "What is this place", aiQuery: "What is this place" }
   // { displayText: "Your Favorite music?", aiQuery: "What is your favorite music?" },
   // { displayText: "Do you have any pets?", aiQuery: "Do you have any pets?" },

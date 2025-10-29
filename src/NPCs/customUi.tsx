@@ -279,12 +279,12 @@ function setVisibility(status: boolean): void {
 }
 
 export function openCustomUI() {
-  let questions = REGISTRY.activeNPC.predefinedQuestions
+  let questions = REGISTRY.activeNPC!.predefinedQuestions
   setVisibility(true)
   selectedPredefinedQuestion = questions
   console.log('QUESTIONS', questions, selectedPredefinedQuestion)
 
-  let npcPortrait = (getData(REGISTRY.activeNPC.entity) as NPCData).portrait
+  let npcPortrait = (getData(REGISTRY.activeNPC!.entity) as NPCData).portrait
   if (npcPortrait) {
     if (typeof npcPortrait === 'string') {
       portraitPath = npcPortrait
@@ -293,7 +293,7 @@ export function openCustomUI() {
     }
   }
 
-  console.log('QUESTIONS', 'NPC Portrait', getData(REGISTRY.activeNPC.entity) as NPCData, portraitPath)
+  console.log('QUESTIONS', 'NPC Portrait', getData(REGISTRY.activeNPC!.entity) as NPCData, portraitPath)
 
   aIndex = 0
   bIndex = 1

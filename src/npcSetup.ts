@@ -9,6 +9,7 @@ import { genericPrefinedQuestions } from './NPCs/customUIFunctionality'
 import { closeAskNpcAiUi as closeCustomUI, openAskNpcAiUi as openCustomUI} from "./NPCs/customNpcUi_v2/npcCustomUi";
 import { ColliderLayer, TextShape, Transform, engine } from '@dcl/sdk/ecs'
 import { CONFIG } from './config'
+import { displayDialogNpcUi } from './NPCs/customNpcUi_v2/npcDialogUi'
 
 const FILE_NAME: string = "npcSetup.ts"
 
@@ -56,7 +57,7 @@ export function setupNPC() {
   console.log("setupNPC", "ENTRY")
 
   //createDogeNpc()
-  createSimonas()
+  //createSimonas() 
   createGnark() 
 
   for (const p of REGISTRY.allNPCs) {
@@ -231,7 +232,7 @@ function createSimonas() {
 function createGnark() {
   let gnark: RemoteNpc
   gnark = new RemoteNpc(
-    { resourceName: "workspaces/genesis_city/characters/gnark", id: "gnark"  },
+    { resourceName: "workspaces/genesis_city/characters/gnark", id: "King Togwaggle"  },
     {
       transformData: { position: Vector3.create(0, 0, 0), scale: Vector3.create(.25, .25, .25) },
       npcData: {
@@ -246,6 +247,7 @@ function createGnark() {
           connectNpcToLobby(REGISTRY.lobbyScene, gnark)
         },
         onWalkAway: () => {
+          displayDialogNpcUi(false)
           closeCustomUI(false)//already in walkaway dont trigger second time
           hideThinking(gnark)
           if (REGISTRY.activeNPC === gnark) REGISTRY.activeNPC = undefined
@@ -258,8 +260,8 @@ function createGnark() {
         faceUser: true,
         portrait:
         {
-          path: DUCKING_NPC_ANIMATIONS.IDLE.portraitPath, height: 320, width: 320
-          , offsetX: -60, offsetY: -40
+          path: DUCKING_NPC_ANIMATIONS.IDLE.portraitPath, height: 220, width: 220
+          , offsetX: -120, offsetY: 0
           , section: { sourceHeight: 400, sourceWidth: 400 }
         },
         darkUI: true,
