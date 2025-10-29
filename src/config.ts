@@ -11,7 +11,7 @@ const DEBUG_FLAGS: Record<string, boolean> = {
 }
 
 const COLYSEUS_ENDPOINT_URL: Record<string, string> = {
-  local: "ws://127.0.0.1:2567",
+  local: "wss://rnd-colyseus-service.decentraland.org",
   localColyseus: "ws://127.0.0.1:2567",
   dev: "wss://rnd-colyseus-service.decentraland.today",
   stg: "wss://rnd-colyseus-service.decentraland.today",

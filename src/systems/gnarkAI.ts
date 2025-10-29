@@ -7,6 +7,9 @@ import { TimeOutComponent } from '../components/timeOut'
 import { Interpolate } from '../helper/interpolation'
 import { CONFIG } from '../config'
 import { REGISTRY } from '../registry'
+import { displayDialogNpcUi } from '../NPCs/customNpcUi_v2/npcDialogUi'
+import { NpcUtilsUi } from 'dcl-npc-toolkit'
+import { RemoteNpc } from '../remoteNpc'
 
 export function distanceSystem() {
   const playerTransform = Transform.getOrNull(engine.PlayerEntity)
@@ -111,6 +114,7 @@ export function enterState(entity: Entity, newState: gnarkStates) {
       break 
     case gnarkStates.YELLING:
       if(REGISTRY.gnark.npcData) REGISTRY.gnark.npcData.npcData.onActivate(null)
+      moveNPCHere(entity,REGISTRY.gnark)
 
       const transform = Transform.getMutable(entity)
       const playerPosition = Transform.get(engine.PlayerEntity)
@@ -120,7 +124,11 @@ export function enterState(entity: Entity, newState: gnarkStates) {
       break
   }
 }
-
+function moveNPCHere(entity: Entity, npc: RemoteNpc) {
+  const tf = Transform.get(entity)
+  const npcTf = Transform.getMutable(npc.entity)
+  npcTf.position = Vector3.clone(tf.position)
+}
 export function leaveState(entity: Entity, oldState: gnarkStates) {
   const animator = Animator.getMutable(entity)
   switch (oldState) {
@@ -133,6 +141,12 @@ export function leaveState(entity: Entity, oldState: gnarkStates) {
     case gnarkStates.YELLING:
       Animator.stopAllAnimations(entity)
       if(REGISTRY.gnark.npcData) REGISTRY.gnark.npcData.npcData.onWalkAway(null)
+        const tf = Transform.get(entity)
+        const npcTf = Transform.getMutable(REGISTRY.gnark.entity)
+        npcTf.position = Vector3.create(8,16,8)
+      //Transform.createOrReplace( entity, Vector3.clone(tf.position) )
+        console.log("walked leave state")
+        //displayDialogNpcUi(false)
       const path = PathDataComponent.get(entity)
       turn(entity, path.path[path.target])
       break

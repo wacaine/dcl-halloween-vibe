@@ -1,5 +1,5 @@
 // Coordinates of path to patrol
-import { Animator, engine, Entity, GltfContainer, MeshRenderer, Transform } from '@dcl/sdk/ecs'
+import { Animator, ColliderLayer, engine, Entity, GltfContainer, MeshRenderer, Transform } from '@dcl/sdk/ecs'
 import { Quaternion, Vector3 } from '@dcl/sdk/math'
 
 const point1 = { x: 8, y: 0, z: 8 }
@@ -50,7 +50,8 @@ export function createGnark(startingSegment: number = 1): Entity {
   if(CONFIG.DEBUG_GNARK_TRIGGER_ENABLED) MeshRenderer.setSphere(detectSphereDB)
 
   GltfContainer.create(gnark, {
-    src: 'assets/scene/Models/gnark.glb'
+    src: 'assets/scene/Models/gnark.glb'//,
+    //visibleMeshesCollisionMask: ColliderLayer.CL_POINTER// | ColliderLayers.CL_PHYSICS,
   })
 
   

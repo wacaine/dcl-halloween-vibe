@@ -234,20 +234,21 @@ function createGnark() {
   gnark = new RemoteNpc(
     { resourceName: "workspaces/genesis_city/characters/gnark", id: "King Togwaggle"  },
     {
-      transformData: { position: Vector3.create(0, 0, 0), scale: Vector3.create(.25, .25, .25) },
+      transformData: { position: Vector3.create(8, 2, 8), scale: Vector3.create(1,1,1) },
       npcData: {
         type: npcLib.NPCType.CUSTOM,
-        model: {
+        model: { 
+          //src: 'models/dogeNPC_anim4.glb',
           src: 'models/gnark.glb',
           visibleMeshesCollisionMask: ColliderLayer.CL_NONE,
-          invisibleMeshesCollisionMask: ColliderLayer.CL_POINTER | ColliderLayer.CL_PHYSICS
+          //invisibleMeshesCollisionMask: ColliderLayer.CL_POINTER | ColliderLayer.CL_PHYSICS
+          invisibleMeshesCollisionMask: ColliderLayer.CL_NONE
         },//'models/Simone_Anim.glb',
         onActivate: () => {
           console.log('gnark.NPC activated!')
           connectNpcToLobby(REGISTRY.lobbyScene, gnark)
         },
         onWalkAway: () => {
-          displayDialogNpcUi(false)
           closeCustomUI(false)//already in walkaway dont trigger second time
           hideThinking(gnark)
           if (REGISTRY.activeNPC === gnark) REGISTRY.activeNPC = undefined
@@ -255,7 +256,7 @@ function createGnark() {
           const NO_LOOP = true
           if (gnark.npcAnimations.SAD) npcLib.playAnimation(gnark.entity, gnark.npcAnimations.SAD.name, true, gnark.npcAnimations.SAD.duration)
         }, 
-        idleAnim: DUCKING_NPC_ANIMATIONS.IDLE.name,
+        idleAnim: DOGE_NPC_ANIMATIONS.IDLE.name,
         //walkingAnim: DOGE_NPC_ANIMATIONS.WALK.name,
         faceUser: true,
         portrait:
@@ -270,7 +271,7 @@ function createGnark() {
         onlyETrigger: true,
         onlyClickTrigger: false,
         onlyExternalTrigger: false,
-        reactDistance: 5,
+        reactDistance: CONFIG.GNARK_DETECT_DISTANCE*2,
         continueOnWalkAway: false,
       }
     },

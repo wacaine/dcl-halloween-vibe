@@ -417,8 +417,7 @@ export function closeAskNpcAiUi(triggerWalkAway: boolean) {
   if (isVisible === false) return
   setVisibility(false)
   disclaimerVisible = false
-  //debugger
-  //if (!triggerWalkAway) return
+  if (!triggerWalkAway) return
   if (REGISTRY.activeNPC) {
     console.log('DebugSession', 'CLOSEUI => walked away', REGISTRY.activeNPC.name)
     endInteraction(REGISTRY.activeNPC)

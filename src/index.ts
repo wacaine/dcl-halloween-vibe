@@ -1,4 +1,4 @@
-import { engine, GltfContainer, Transform } from '@dcl/sdk/ecs'
+import { engine, GltfContainer, InputAction, PointerEvents, pointerEventsSystem, PointerEventType, Transform } from '@dcl/sdk/ecs'
 import { Vector3 } from '@dcl/sdk/math'
 import * as utils from '@dcl-sdk/utils'
 import "./polyfill/delcares";
@@ -57,10 +57,33 @@ export function main() {
     }
   })
 
-  createGnark(0)
+  const gnark = createGnark(0)
   //createGnark(1)
 
+  // Add clickable behavior to an entity
+// PointerEvents.create(gnark, {
+//   pointerEvents: [
+//     { 
+//       eventType: PointerEventType.PET_DOWN, 
+//       eventInfo: { 
+//         button: InputAction.IA_POINTER,
+//         hoverText: 'Click me',
+//         showFeedback: true,       // Show interaction feedback
+//         maxDistance: 10           // Max interaction distance 
+//       } 
+//     }
+//   ]
+// })
 
+// // Response to click events
+// pointerEventsSystem.onPointerDown(
+//   {entity: gnark,  opts:{ button: InputAction.IA_POINTER }} ,
+//   (event) => {
+//     console.log('Entity clicked!')
+//     // Handle the click
+//     if(!REGISTRY.activeNPC) REGISTRY.gnark.npcData?.npcData.onActivate(null)
+//   }
+// )
 
 
   // Setup the coins

@@ -30,7 +30,7 @@ export function connectNpcToLobby(host: LobbyScene, npc: RemoteNpc): void {
   startThinking(npc, [REGISTRY.askWaitingForResponse])
 
   resetMessages(streamedMsgs)
-
+ 
 
   //if (GAME_STATE.gameRoom && GAME_STATE.gameConnected === 'connected') {
     console.log(FILE_NAME, METHOD_NAME, "Connected Route");

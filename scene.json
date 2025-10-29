@@ -50,4 +50,9 @@
     "base": "74,-9"
   },
   "name": "Gnark"
+  ,
+  "worldConfiguration" : {
+    "name": "tracey.dcl.eth",
+    "skyboxConfig": { "fixedTime": 0 }
+  }
 }
