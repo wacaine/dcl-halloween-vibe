@@ -6,6 +6,7 @@ import { PathDataComponent } from '../components/pathData'
 import { TimeOutComponent } from '../components/timeOut'
 import { Interpolate } from '../helper/interpolation'
 import { CONFIG } from '../config'
+import { REGISTRY } from '../registry'
 
 export function distanceSystem() {
   const playerTransform = Transform.getOrNull(engine.PlayerEntity)
@@ -107,8 +108,10 @@ export function enterState(entity: Entity, newState: gnarkStates) {
       timer.hasFinished = false
       // }
 
-      break
+      break 
     case gnarkStates.YELLING:
+      if(REGISTRY.gnark.npcData) REGISTRY.gnark.npcData.npcData.onActivate(null)
+
       const transform = Transform.getMutable(entity)
       const playerPosition = Transform.get(engine.PlayerEntity)
       transform.rotation = Quaternion.fromLookAt(transform.position, playerPosition.position)
@@ -129,10 +132,11 @@ export function leaveState(entity: Entity, oldState: gnarkStates) {
       break
     case gnarkStates.YELLING:
       Animator.stopAllAnimations(entity)
+      if(REGISTRY.gnark.npcData) REGISTRY.gnark.npcData.npcData.onWalkAway(null)
       const path = PathDataComponent.get(entity)
       turn(entity, path.path[path.target])
       break
-  }
+  }  
 }
 
 export function turn(entity: Entity, target: Vector3) {

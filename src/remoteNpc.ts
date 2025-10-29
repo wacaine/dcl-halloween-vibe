@@ -58,6 +58,8 @@ export class RemoteNpc {
   isThinking: boolean = false
   npcAnimations: NpcAnimationNameType
 
+  npcData:NpcCreationArgs
+
   onEndOfRemoteInteractionStream: () => void
   onEndOfInteraction: () => void
 
@@ -71,6 +73,7 @@ export class RemoteNpc {
     this.entity = createNpc(npcCreationArgs)
     this.config = inConfig
     this.args = inArgs
+    this.npcData = npcCreationArgs
 
     if (inArgs) {
       this.thinkingIconEnabled = inArgs.thinking !== undefined && inArgs.thinking.enabled

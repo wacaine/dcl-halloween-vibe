@@ -30,6 +30,8 @@ export type NpcAnimationNameType = {
 class Registry {
   myNPC!: RemoteNpc
   activeNPC!: RemoteNpc
+  simonas!: RemoteNpc
+  gnark!: RemoteNpc
   allNPCs: RemoteNpc[] = []
   activeNPCSound: Map<string, Entity> = new Map()
   askWaitingForResponse!: Dialog

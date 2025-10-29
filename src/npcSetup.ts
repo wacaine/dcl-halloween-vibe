@@ -55,8 +55,9 @@ const SIMONAS_NPC_ANIMATIONS: NpcAnimationNameType = {
 export function setupNPC() {
   console.log("setupNPC", "ENTRY")
 
-  createDogeNpc()
+  //createDogeNpc()
   createSimonas()
+  createGnark() 
 
   for (const p of REGISTRY.allNPCs) {
     //TODO: Set Display text to center
@@ -223,7 +224,74 @@ function createSimonas() {
   )
 
   simonas.name = "npc.simonas"
+  REGISTRY.simonas = simonas
   REGISTRY.allNPCs.push(simonas)
+}
+
+function createGnark() {
+  let gnark: RemoteNpc
+  gnark = new RemoteNpc(
+    { resourceName: "workspaces/genesis_city/characters/gnark", id: "gnark"  },
+    {
+      transformData: { position: Vector3.create(0, 0, 0), scale: Vector3.create(.25, .25, .25) },
+      npcData: {
+        type: npcLib.NPCType.CUSTOM,
+        model: {
+          src: 'models/gnark.glb',
+          visibleMeshesCollisionMask: ColliderLayer.CL_NONE,
+          invisibleMeshesCollisionMask: ColliderLayer.CL_POINTER | ColliderLayer.CL_PHYSICS
+        },//'models/Simone_Anim.glb',
+        onActivate: () => {
+          console.log('gnark.NPC activated!')
+          connectNpcToLobby(REGISTRY.lobbyScene, gnark)
+        },
+        onWalkAway: () => {
+          closeCustomUI(false)//already in walkaway dont trigger second time
+          hideThinking(gnark)
+          if (REGISTRY.activeNPC === gnark) REGISTRY.activeNPC = undefined
+          console.log("NPC", gnark.name, 'on walked away')
+          const NO_LOOP = true
+          if (gnark.npcAnimations.SAD) npcLib.playAnimation(gnark.entity, gnark.npcAnimations.SAD.name, true, gnark.npcAnimations.SAD.duration)
+        }, 
+        idleAnim: DUCKING_NPC_ANIMATIONS.IDLE.name,
+        //walkingAnim: DOGE_NPC_ANIMATIONS.WALK.name,
+        faceUser: true,
+        portrait:
+        {
+          path: DUCKING_NPC_ANIMATIONS.IDLE.portraitPath, height: 320, width: 320
+          , offsetX: -60, offsetY: -40
+          , section: { sourceHeight: 400, sourceWidth: 400 }
+        },
+        darkUI: true,
+        coolDownDuration: 3,
+        hoverText: 'Talk',
+        onlyETrigger: true,
+        onlyClickTrigger: false,
+        onlyExternalTrigger: false,
+        reactDistance: 5,
+        continueOnWalkAway: false,
+      }
+    },
+    {
+      npcAnimations: SIMONAS_NPC_ANIMATIONS,
+      thinking: {
+        enabled: true,
+        modelPath: 'models/loading-icon.glb',
+        offsetX: 0,
+        offsetY: 2.3,
+        offsetZ: 0
+      }
+      , onEndOfRemoteInteractionStream: () => {
+        openCustomUI()
+      }
+      , onEndOfInteraction: () => { },
+      predefinedQuestions: genericPrefinedQuestions
+    }
+  )
+
+  gnark.name = "npc.gnark"
+  REGISTRY.gnark = gnark
+  REGISTRY.allNPCs.push(gnark)
 }
 
 function createDebugEntity(text: string, position: Vector3) {

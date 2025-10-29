@@ -12,14 +12,15 @@ export class NpcQuestionData {
 }
 
 export const genericPrefinedQuestions: NpcQuestionData[] = [
-  { displayText: "Sing me a song!", aiQuery: "Sing me a song!" },
-  { displayText: "Recite me a poem!", aiQuery: "Recite me a poem!" },
-  { displayText: "Tell me a joke!", aiQuery: "Tell me a joke!" },
-  { displayText: "Your Favorite music?", aiQuery: "What is your favorite music?" },
-  { displayText: "Do you have any pets?", aiQuery: "Do you have any pets?" },
-  { displayText: "What can I do here?", aiQuery: "What can I do here?" },
-  { displayText: "What is a wearable!", aiQuery: "What is a wearable!" },
-  { displayText: "What is an emote!", aiQuery: "What is an emote!" }
+  { displayText: "Tell me a scrary story!", aiQuery: "Tell me a scrary story!" },
+  { displayText: "What are you afraid of?", aiQuery: "What are you afraid of?" },
+  { displayText: "What are all these coins?", aiQuery: "What are all these coins?" }, 
+  { displayText: "What is this place", aiQuery: "What is this place" }
+  // { displayText: "Your Favorite music?", aiQuery: "What is your favorite music?" },
+  // { displayText: "Do you have any pets?", aiQuery: "Do you have any pets?" },
+  // { displayText: "What can I do here?", aiQuery: "What can I do here?" },
+  // { displayText: "What is a wearable!", aiQuery: "What is a wearable!" },
+  // { displayText: "What is an emote!", aiQuery: "What is an emote!" }
 ]
 
 export function sendQuestion(questionData: NpcQuestionData | string) {
