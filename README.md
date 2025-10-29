@@ -1,6 +1,18 @@
-# Gnark (SDK7 Version)
+# Frankenstein Build (SDK7 Version)
 
-This scene has no description yet.
+
+Frankenstein build. Took multiple demos and mashed them together. Then instead of using inworld ai with colyseus did it with Digital Ocean and Firebase
+
+https://github.com/decentraland-scenes/Gnark-patrol https://github.com/decentraland-scenes/coin-pickuphttps://github.com/decentraland-scenes/inworld-ai-sdk7
+
+Used
+
+* Digital Ocean Agents for Chat
+* Gemini for image creation and skinning
+* Github copilot for coding assistant
+* Cline for more advanced coding when copilot failed me
+
+
 
 > Please visit the [SDK7 scene template](https://github.com/decentraland/sdk7-scene-template) for a SDK7 summary.
 

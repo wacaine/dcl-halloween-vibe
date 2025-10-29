@@ -2,14 +2,14 @@
   "ecs7": true,
   "runtimeVersion": "7",
   "display": {
-    "title": "Gnark",
+    "title": "Frankenstien",
     "description": "Test",
     "navmapThumbnail": "images/scene-thumbnail.png",
     "favicon": "favicon_asset"
   },
   "owner": "",
   "contact": {
-    "name": "Lean",
+    "name": "Caine",
     "email": ""
   },
   "main": "bin/game.js",

@@ -77,7 +77,18 @@ export function initArena(host: LobbyScene, force: boolean) {
 
   const roomName = "genesis_plaza"
   console.log(FILE_NAME, METHOD_NAME, "ENTRY", "JoinOrCreate")
-  joinOrCreateRoomAsync(roomName, connectOptions)
+  //joinOrCreateRoomAsync(roomName, connectOptions)
+  //FIXME how can we clean this up more!!!
+  //dont need colyseus at all
+  if (host.pendingConvoWithNPC) {
+    startConvoWithNpc(host, host.pendingConvoWithNPC)
+    //do we want this side affect?
+    host.pendingConvoWithNPC = undefined
+    host.pendingConvoActionWithNPC = undefined
+  }
+  if (host.pendingConvoActionWithNPC) {
+    host.pendingConvoActionWithNPC()
+  }
 }
 
 export function onConnectHost(host: LobbyScene, room: Room<NpcGameRoomState>) {

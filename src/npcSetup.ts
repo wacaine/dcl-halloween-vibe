@@ -281,7 +281,7 @@ function createGnark() {
         enabled: true,
         modelPath: 'models/loading-icon.glb',
         offsetX: 0,
-        offsetY: 2.3,
+        offsetY: 4,
         offsetZ: 0
       }
       , onEndOfRemoteInteractionStream: () => {
