@@ -8,7 +8,7 @@ import { distanceSystem, walkAround } from './systems/gnarkAI'
 import { setupUi } from './ui'
 import { initRegistery, REGISTRY } from './registry'
 import { initGameState } from './state'
-import { initConfig } from './config'
+import { CONFIG, initConfig } from './config'
 import { getAndSetUserDataIfNull } from './userData'
 import { initDialogs } from './waitingDialog'
 import { LobbyScene } from './lobby-scene/lobbyScene'
@@ -75,6 +75,6 @@ export function main() {
   engine.addSystem(distanceSystem)
 
 
-  utils.triggers.enableDebugDraw(true)
+  utils.triggers.enableDebugDraw(CONFIG.DEBUG_ACTIVE_SCENE_TRIGGER_ENABLED)
 
 }

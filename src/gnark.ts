@@ -33,20 +33,21 @@ export function createGnark(startingSegment: number = 1): Entity {
     rotation: Quaternion.fromLookAt(point1, pathArray[target])
   })
 
-  const detectScale = CONFIG.GNARK_DETECT_DISTANCE*10
-  Transform.create(detectSphere, {
-    position: Vector3.create(0,.1,0),
-    rotation: Quaternion.fromEulerDegrees(0,0,90),
-    scale: Vector3.create(1,detectScale,detectScale),
-    parent: gnark
-  })
+  // const detectScale = CONFIG.GNARK_DETECT_DISTANCE*10
+  // Transform.create(detectSphere, {
+  //   position: Vector3.create(0,.1,0),
+  //   rotation: Quaternion.fromEulerDegrees(0,0,90),
+  //   scale: Vector3.create(1,detectScale,detectScale),
+  //   parent: gnark
+  // })
 
   Transform.create(detectSphereDB, {
     position: Vector3.create(0,.2,0),
     scale: Vector3.create(CONFIG.GNARK_DETECT_DISTANCE*2,.1,CONFIG.GNARK_DETECT_DISTANCE*2),
     parent: gnark
   })
-  MeshRenderer.setSphere(detectSphereDB)
+
+  if(CONFIG.DEBUG_GNARK_TRIGGER_ENABLED) MeshRenderer.setSphere(detectSphereDB)
 
   GltfContainer.create(gnark, {
     src: 'assets/scene/Models/gnark.glb'

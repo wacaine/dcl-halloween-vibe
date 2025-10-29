@@ -76,6 +76,7 @@ export class Config {
   EMOTION_DEBUG: boolean = EMOTION_DEBUG[ENV]
 
   GNARK_DETECT_DISTANCE: number = 5;//distance to detect player
+  DEBUG_GNARK_TRIGGER_ENABLED = false
 
   center!: Vector3
   centerGround!: Vector3
